@@ -20,3 +20,38 @@ AnalyticsEventButton.addEventListener('click', (evt) => {
             AnalyticsResult.innerHTML += '<a href="'+url+'" target="_blank">View Events on the Amazon Pinpoint Console</a>';
         });
 });
+
+import Amplify, { API, graphqlOperation } from "aws-amplify";
+Amplify.configure(awsconfig);
+import * as queries from './graphql/queries';
+import * as mutations from './graphql/mutations';
+
+const listTodos = async () => {
+  console.log("listTodos");
+  // Simple query
+  const allTodos = await API.graphql(graphqlOperation(queries.listTodos));
+  console.log(allTodos);
+
+  // Query using a parameter
+  const oneTodo = await API.graphql(graphqlOperation(queries.getTodo, { id: 'some id' }));
+  console.log(oneTodo);
+};
+
+listTodos();
+
+const addTask = async (taskName) => {
+  // Mutation
+  const todoDetails = {
+      name: taskName,
+      description: 'Learn AWS AppSync'
+  };
+
+  const newTodo = await API.graphql(graphqlOperation(mutations.createTodo, {input: todoDetails}));
+  console.log(newTodo);
+}
+
+const addTaskButton = document.getElementById('AddTaskButton');
+
+addTaskButton.addEventListener('click', (evt) => {
+  addTask("from button");
+});
