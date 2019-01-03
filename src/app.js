@@ -25,6 +25,10 @@ import Amplify, { API, graphqlOperation } from "aws-amplify";
 Amplify.configure(awsconfig);
 import * as queries from './graphql/queries';
 import * as mutations from './graphql/mutations';
+import { AmplifyPlugin } from 'aws-amplify-vue'
+Amplify.configure(aws_exports)
+
+Vue.use(AmplifyPlugin, AmplifyModules)
 
 const listTodos = async () => {
   console.log("listTodos");
@@ -55,3 +59,7 @@ const addTaskButton = document.getElementById('AddTaskButton');
 addTaskButton.addEventListener('click', (evt) => {
   addTask("from button");
 });
+
+new Vue({
+  render: h => h(App)
+}).$mount('#app')
