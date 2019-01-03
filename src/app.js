@@ -2,6 +2,7 @@ import Auth from '@aws-amplify/auth';
 import Analytics from '@aws-amplify/analytics';
 
 import awsconfig from './aws-exports';
+import aws_exports from './aws-exports'
 
 // retrieve temporary AWS credentials and sign requests
 Auth.configure(awsconfig);
@@ -28,8 +29,6 @@ import * as mutations from './graphql/mutations';
 import { AmplifyPlugin } from 'aws-amplify-vue'
 Amplify.configure(aws_exports)
 
-Vue.use(AmplifyPlugin, AmplifyModules)
-
 const listTodos = async () => {
   console.log("listTodos");
   // Simple query
@@ -39,6 +38,13 @@ const listTodos = async () => {
   // Query using a parameter
   const oneTodo = await API.graphql(graphqlOperation(queries.getTodo, { id: 'some id' }));
   console.log(oneTodo);
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: allTodos
+    }
+  })
 };
 
 listTodos();
@@ -60,6 +66,4 @@ addTaskButton.addEventListener('click', (evt) => {
   addTask("from button");
 });
 
-new Vue({
-  render: h => h(App)
-}).$mount('#app')
+//Vue.use(AmplifyPlugin, AmplifyModules)
