@@ -27,8 +27,10 @@
             <div class="app-body">
                 <button id="AnalyticsEventButton">Generate Analytics Event</button>
                 <div id="AnalyticsResult"></div>
-                <input type="text" id="newTask"/>
-                <button id="AddTaskButton">Add TODO</button>
+                <div id="new-task">
+                  <input v-model="name" />
+                  <button v-on:click="addTask">>Add TODO</button>
+                </div>
                 <div id="app">
                   <ol>
                     <li v-for="todo in todos">

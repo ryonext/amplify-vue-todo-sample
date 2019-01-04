@@ -45,21 +45,26 @@ const listTodos = async () => {
 
 listTodos();
 
-const addTask = async (taskName) => {
+const insertTask = async (taskName) => {
   // Mutation
   const todoDetails = {
       name: taskName,
-      description: 'Learn AWS AppSync'
+      description: '🍣'
   };
 
   const newTodo = await API.graphql(graphqlOperation(mutations.createTodo, {input: todoDetails}));
-  console.log(newTodo);
 }
 
-const addTaskButton = document.getElementById('AddTaskButton');
-
-addTaskButton.addEventListener('click', (evt) => {
-  addTask("from button");
-});
+var newTask = new Vue({
+  el: '#new-task',
+  data: {
+    name: "sushi"
+  },
+  methods: {
+    addTask: function() {
+      insertTask(this.name);
+    }
+  }
+})
 
 //Vue.use(AmplifyPlugin, AmplifyModules)
