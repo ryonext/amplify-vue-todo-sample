@@ -30,7 +30,10 @@
                 <input type="text" id="newTask"/>
                 <button id="AddTaskButton">Add TODO</button>
                 <div id="app">
-                  {{ message }}
+                  <ol>
+                    <li v-for="todo in todos">
+                      {{ todo }}
+                    </li>
                 </div>
             </div>
         </div>

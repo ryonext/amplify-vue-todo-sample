@@ -32,17 +32,13 @@ Amplify.configure(aws_exports)
 const listTodos = async () => {
   console.log("listTodos");
   // Simple query
-  const allTodos = await API.graphql(graphqlOperation(queries.listTodos));
-  console.log(allTodos);
-
-  // Query using a parameter
-  const oneTodo = await API.graphql(graphqlOperation(queries.getTodo, { id: 'some id' }));
-  console.log(oneTodo);
+  const res = await API.graphql(graphqlOperation(queries.listTodos));
+  console.log(res.data.listTodos.items);
 
   var app = new Vue({
     el: '#app',
     data: {
-      message: allTodos
+      todos: res.data.listTodos.items
     }
   })
 };
