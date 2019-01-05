@@ -29,18 +29,20 @@ import * as mutations from './graphql/mutations';
 import { AmplifyPlugin } from 'aws-amplify-vue'
 Amplify.configure(aws_exports)
 
+var app = new Vue({
+  el: '#app',
+  data: {
+    todos: []
+  }
+})
+
 const listTodos = async () => {
   console.log("listTodos");
   // Simple query
   const res = await API.graphql(graphqlOperation(queries.listTodos, {limit: 100}));
   console.log(res.data.listTodos.items);
 
-  var app = new Vue({
-    el: '#app',
-    data: {
-      todos: res.data.listTodos.items
-    }
-  })
+  app.todos = res.data.listTodos.items;
 };
 
 listTodos();
@@ -53,7 +55,9 @@ const insertTask = async (taskName) => {
   };
 
   const newTodo = await API.graphql(graphqlOperation(mutations.createTodo, {input: todoDetails}));
+  listTodos();
 }
+
 
 var newTask = new Vue({
   el: '#new-task',
