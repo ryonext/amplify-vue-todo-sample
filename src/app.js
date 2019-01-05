@@ -65,8 +65,8 @@ var newTodo = new Vue({
     name: "sushi"
   },
   methods: {
-    addTodo: function() {
-      insertTodo(this.name);
+    addTodo: () => {
+      insertTodo(newTodo.name);
     }
   }
 })
