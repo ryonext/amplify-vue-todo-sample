@@ -47,10 +47,10 @@ const listTodos = async () => {
 
 listTodos();
 
-const insertTask = async (taskName) => {
+const insertTodo = async (todoName) => {
   // Mutation
   const todoDetails = {
-      name: taskName,
+      name: todoName,
       description: '🍣'
   };
 
@@ -59,14 +59,14 @@ const insertTask = async (taskName) => {
 }
 
 
-var newTask = new Vue({
-  el: '#new-task',
+var newTodo = new Vue({
+  el: '#new-todo',
   data: {
     name: "sushi"
   },
   methods: {
-    addTask: function() {
-      insertTask(this.name);
+    addTodo: function() {
+      insertTodo(this.name);
     }
   }
 })
