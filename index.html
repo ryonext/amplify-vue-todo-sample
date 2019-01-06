@@ -29,12 +29,13 @@
                 <div id="AnalyticsResult"></div>
                 <div id="new-todo">
                   <input v-model="name" />
-                  <button v-on:click="addTodo">>Add TODO</button>
+                  <button v-on:click="addTodo">Add TODO</button>
                 </div>
                 <div id="app">
-                  <ol>
+                  <ul>
                     <li v-for="todo in todos">
-                      {{ todo }}
+                      <button v-on:click="deleteTodo(todo.id)">Delete</button>
+                      {{ todo.name }}
                     </li>
                 </div>
             </div>

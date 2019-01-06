@@ -33,6 +33,15 @@ var app = new Vue({
   el: '#app',
   data: {
     todos: []
+  },
+  methods: {
+    deleteTodo: async (id) => {
+      const todoDetails = {
+        id: id
+      };
+      await API.graphql(graphqlOperation(mutations.deleteTodo, {input: todoDetails}));
+      listTodos();
+    }
   }
 })
 
